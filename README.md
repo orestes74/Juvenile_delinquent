@@ -2,6 +2,8 @@
 
 Wan 모델 영상생성 — 대사 없는 회화풍 단편 애니메이션의 첫 장면 제작 기록입니다.
 
+**가속 설정 추가:** Wan 본체를 유지하고 CUDA 13·SageAttention·LightX2V LoRA를 적용한 4·8스텝 워크플로를 추가했습니다. 같은 1024×768·약 5초의 4스텝 검증은 **237.31초**였습니다. 기존 20스텝의 4,125초와는 실행 환경·스텝·CFG·LoRA·프롬프트가 달라 동일 화질 비교가 아닙니다. [설치·성능·화질 차이](ACCELERATION.md)와 [다른 PC에서 이어갈 작업 기록](PROJECT_STATUS.md)을 참고하세요.
+
 첫 장면은 어두운 방에서 시험지를 내려다보는 어린 소년입니다. 짙은 남색·자주색과 따뜻한 책상 조명, 유화와 과슈의 붓 자국을 사용합니다. 소년이 조금 움츠러들고 창문의 가느다란 금이 번지는 움직임을 목표로 합니다. 이 이미지는 imagegen으로 제작·수정했으며, 영상 생성은 로컬 ComfyUI의 Wan으로 수행합니다.
 
 ![첫 장면 기준 그림](assets/shot01-younger.png)
@@ -85,7 +87,7 @@ python3 scripts/submit_workflow.py --url http://127.0.0.1:8188 --wait
 ffmpeg -i result.webm -t 5 -an -c:v libx264 -crf 18 -pix_fmt yuv420p -movflags +faststart result.mp4
 ```
 
-## 확인한 로컬 환경과 현재 검증 상태
+## 최초 기본 워크플로의 검증 환경과 결과
 
 - NVIDIA DGX Spark / GB10, 128GB 통합 메모리, ARM64 Linux
 - Python 3.12.3, PyTorch 2.10.0+cu128
@@ -99,7 +101,7 @@ ffmpeg -i result.webm -t 5 -an -c:v libx264 -crf 18 -pix_fmt yuv420p -movflags +
 
 [첫 5초 MP4 시안](examples/shot01-younger.mp4) · [실행 기록](examples/shot01-run.json)
 
-현재 환경은 CUDA 최적화 관련 경고가 있고 SageAttention·FlashAttention이 설치되지 않았습니다. 위 수치를 최적화된 Spark나 다른 GPU의 성능으로 일반화하지 않습니다. 모델 검사는 파일 내용 전체의 SHA-256 검증이 아닌 헤더·길이 검사입니다.
+최초 기본 검증 당시에는 CUDA 최적화 관련 경고가 있었고 SageAttention·FlashAttention이 설치되지 않았습니다. 이후 추가한 가속 환경은 `ACCELERATION.md`에 구분해 기록했습니다. 위 수치를 최적화된 Spark나 다른 GPU의 성능으로 일반화하지 않습니다. 모델 검사는 파일 내용 전체의 SHA-256 검증이 아닌 헤더·길이 검사입니다.
 
 [NVIDIA Spark ComfyUI 안내](https://github.com/NVIDIA/dgx-spark-playbooks/blob/main/nvidia/playbook-comfyui/README.md)는 CUDA 13.0 지원 환경을 안내합니다. 기존 환경을 바로 덮어쓰기보다 별도 환경에서 비교하는 편이 재현에 유리합니다.
 

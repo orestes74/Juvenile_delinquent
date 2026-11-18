@@ -8,8 +8,9 @@ from pathlib import Path
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("models_dir", type=Path, help="ComfyUI/models directory")
+    parser.add_argument("--manifest", type=Path, default=Path(__file__).resolve().parents[1] / "models.json")
     args = parser.parse_args()
-    manifest = json.loads((Path(__file__).resolve().parents[1] / "models.json").read_text())
+    manifest = json.loads(args.manifest.read_text())
     failures = 0
     for item in manifest["files"]:
         path = args.models_dir / item["path"]

@@ -27,7 +27,7 @@ def main():
     parser.add_argument("--image", type=Path, default=ROOT / "assets/shot01-younger.png")
     parser.add_argument("--workflow", type=Path, default=ROOT / "workflows/shot01-api.json")
     parser.add_argument("--output", type=Path, default=ROOT / "outputs")
-    parser.add_argument("--seed", type=int, default=20261118)
+    parser.add_argument("--seed", type=int, help="Override seed; default keeps workflow seeds")
     parser.add_argument("--wait", action="store_true", help="Wait and download saved output")
     parser.add_argument("--timeout", type=float, default=14400, help="Wait limit in seconds")
     parser.add_argument("--dry-run", action="store_true", help="Validate local inputs; no API calls")
@@ -36,10 +36,12 @@ def main():
     if not args.image.is_file():
         parser.error(f"image not found: {args.image}")
     for item in graph.values():
-        if item["class_type"] == "KSamplerAdvanced":
+        if item["class_type"] == "KSamplerAdvanced" and args.seed is not None:
             item["inputs"]["noise_seed"] = args.seed
     if args.dry_run:
-        print(f"OK: {len(graph)} nodes, image {args.image.name}, seed {args.seed}")
+        seeds = sorted({item["inputs"]["noise_seed"] for item in graph.values()
+                        if item["class_type"] == "KSamplerAdvanced"})
+        print(f"OK: {len(graph)} nodes, image {args.image.name}, seeds {seeds}")
         return
     base = args.url.rstrip("/")
     boundary = uuid.uuid4().hex

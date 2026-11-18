@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-18",
+  "hardware": "NVIDIA DGX Spark GB10 128GB unified memory",
+  "comfyui_commit": "f6b869d7d35f7160bf2fdeabaed378d737834540",
+  "torch": "2.10.0+cu130",
+  "sageattention": "2.2.0",
+  "sageattention_commit": "d1a57a546c3d395b1ffcbeecc66d81db76f3b4b5",
+  "native_cuda_arch": "12.1",
+  "baseline_cu128_1024_20step_seconds": 4125,
+  "results": [
+    {
+      "mode": "reference20_512",
+      "server_execution_seconds": 421.64,
+      "client_poll_elapsed_seconds": 425.74,
+      "width": 512,
+      "height": 384,
+      "frames": 81,
+      "fps": 16,
+      "seed": 20261119
+    },
+    {
+      "mode": "light4_512",
+      "server_execution_seconds": 65.3,
+      "client_poll_elapsed_seconds": 70.05,
+      "width": 512,
+      "height": 384,
+      "frames": 81,
+      "fps": 16,
+      "seed": 20261119
+    },
+    {
+      "mode": "light8_512",
+      "server_execution_seconds": 53.54,
+      "client_poll_elapsed_seconds": 55.04,
+      "width": 512,
+      "height": 384,
+      "frames": 81,
+      "fps": 16,
+      "seed": 20261119
+    },
+    {
+      "mode": "light4_1024",
+      "server_execution_seconds": 237.31,
+      "client_poll_elapsed_seconds": 238.98,
+      "width": 1024,
+      "height": 768,
+      "frames": 81,
+      "fps": 16,
+      "seed": 20261119
+    },
+    {
+      "mode": "shot03-paper-light4",
+      "server_execution_seconds": 229.35,
+      "width": 1024,
+      "height": 768,
+      "frames": 81,
+      "fps": 16,
+      "seed": 20261120
+    }
+  ],
+  "note": "Different warm/cold model states; see ACCELERATION.md. LoRA/steps/CFG change output quality. Not a hardware-only speedup claim."
+}

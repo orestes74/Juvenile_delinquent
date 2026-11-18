@@ -1,0 +1,209 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "3": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "wan",
+      "device": "default"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "shot02-start.png"
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "3",
+        0
+      ],
+      "text": "A hand-painted 2D animated film, one continuous shot. Clearly visible character action throughout five seconds. The small 10-year-old Korean boy at the desk is the same child as in the input image. At first he looks down at the exam paper. The adult at the left suddenly raises one forearm and makes one forceful pointing gesture toward the desk without touching the child. The boy visibly flinches: his shoulders jerk upward, his head pulls backward and then turns toward the adult, his torso recoils into the chair. He then looks back down and grips the exam paper with both hands. His eyes blink and his shirt folds move naturally. Preserve the dark indigo and burgundy painted room, the warm amber desk lamp and the thick gouache brush texture. Static medium-wide camera, clear readable body movement, expressive animated acting, no cuts."
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "3",
+        0
+      ],
+      "text": "motionless, frozen pose, static character, photorealistic, 3d render, camera zoom, camera cuts, subtitles, watermark, face morphing, extra limbs, extra fingers, detached hands, physical contact with child, injury, weapon, paper tearing, multiple sheets of paper, flicker"
+    }
+  },
+  "8": {
+    "class_type": "WanImageToVideo",
+    "inputs": {
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ],
+      "width": 1024,
+      "height": 768,
+      "length": 81,
+      "batch_size": 1,
+      "start_image": [
+        "5",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ModelSamplingSD3",
+    "inputs": {
+      "model": [
+        "15",
+        0
+      ],
+      "shift": 5.0
+    }
+  },
+  "10": {
+    "class_type": "ModelSamplingSD3",
+    "inputs": {
+      "model": [
+        "16",
+        0
+      ],
+      "shift": 5.0
+    }
+  },
+  "11": {
+    "class_type": "KSamplerAdvanced",
+    "inputs": {
+      "model": [
+        "9",
+        0
+      ],
+      "add_noise": "enable",
+      "noise_seed": 20261119,
+      "steps": 4,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ],
+      "latent_image": [
+        "8",
+        2
+      ],
+      "start_at_step": 0,
+      "end_at_step": 2,
+      "return_with_leftover_noise": "enable"
+    }
+  },
+  "12": {
+    "class_type": "KSamplerAdvanced",
+    "inputs": {
+      "model": [
+        "10",
+        0
+      ],
+      "add_noise": "disable",
+      "noise_seed": 20261119,
+      "steps": 4,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ],
+      "latent_image": [
+        "11",
+        0
+      ],
+      "start_at_step": 2,
+      "end_at_step": 10000,
+      "return_with_leftover_noise": "disable"
+    }
+  },
+  "13": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "SaveWEBM",
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ],
+      "filename_prefix": "lightx2v/shot02-4step",
+      "codec": "vp9",
+      "fps": 16.0,
+      "crf": 20.0
+    }
+  },
+  "15": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "lora_name": "lightx2v_1022_high_native.safetensors",
+      "strength_model": 1.0
+    }
+  },
+  "16": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "lora_name": "lightx2v_1022_low_native.safetensors",
+      "strength_model": 1.0
+    }
+  }
+}

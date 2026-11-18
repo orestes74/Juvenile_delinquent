@@ -1,0 +1,27 @@
+{
+  "model": "LightX2V 1022 paired LoRAs for the existing Wan 2.2 I2V A14B base",
+  "source_repository": "lightx2v/Wan2.2-Distill-Loras",
+  "files": [
+    {
+      "path": "loras/wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+      "expected_bytes": 634645944,
+      "download_url": "https://huggingface.co/lightx2v/Wan2.2-Distill-Loras/resolve/main/wan2.2_i2v_A14b_high_noise_lora_rank64_lightx2v_4step_1022.safetensors"
+    },
+    {
+      "path": "loras/wan2.2_i2v_A14b_low_noise_lora_rank64_lightx2v_4step_1022.safetensors",
+      "expected_bytes": 739472104,
+      "download_url": "https://huggingface.co/lightx2v/Wan2.2-Distill-Loras/resolve/main/wan2.2_i2v_A14b_low_noise_lora_rank64_lightx2v_4step_1022.safetensors"
+    }
+  ],
+  "native_outputs": [
+    {
+      "path": "loras/lightx2v_1022_high_native.safetensors",
+      "expected_bytes": 634646504
+    },
+    {
+      "path": "loras/lightx2v_1022_low_native.safetensors",
+      "expected_bytes": 632163648
+    }
+  ],
+  "note": "Original LoRA files require the included conversion script for this native ComfyUI workflow. Weights are not included."
+}
