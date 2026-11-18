@@ -1,0 +1,27 @@
+{
+  "model": "Wan 2.2 I2V A14B FP8 scaled",
+  "source_repository": "Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+  "note": "Weights are not included. expected_bytes records local files; it is not a cryptographic checksum. Respect upstream model licenses.",
+  "files": [
+    {
+      "path": "diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "expected_bytes": 14294742832,
+      "download_url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
+    },
+    {
+      "path": "diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "expected_bytes": 14294742832,
+      "download_url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
+    },
+    {
+      "path": "text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "expected_bytes": 6735906897,
+      "download_url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    },
+    {
+      "path": "vae/wan_2.1_vae.safetensors",
+      "expected_bytes": 253815318,
+      "download_url": "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors"
+    }
+  ]
+}
