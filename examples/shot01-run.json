@@ -1,0 +1,28 @@
+{
+  "model": "Wan 2.2 I2V A14B FP8 scaled, high + low noise",
+  "image": "shot01-younger.png",
+  "width": 1024,
+  "height": 768,
+  "frames": 81,
+  "fps": 16,
+  "steps": 20,
+  "cfg": 3.5,
+  "sampler": "euler",
+  "scheduler": "simple",
+  "shift": 8,
+  "seed": 20261118,
+  "audio": false,
+  "image_creation_tool": "built-in imagegen",
+  "image_edit_prompt": "Change only the boy to look about five years younger, a clearly 10-to-11-year-old Korean schoolboy with a smaller child-sized body, narrower shoulders, smaller hands and softer rounder cheeks. Preserve the room, composition, lighting, saturated indigo and burgundy palette and oil/gouache brush texture.",
+  "status": "completed",
+  "generation_seconds": 4125,
+  "hardware": "NVIDIA DGX Spark GB10 128GB unified memory",
+  "export": {
+    "codec": "h264",
+    "duration_seconds": 5.0,
+    "frames": 80,
+    "fps": 16,
+    "audio": false
+  },
+  "visual_review": "Start, middle, final frames reviewed. Painterly style and identity broadly preserved; subtle motion; crack propagation not clearly realized."
+}

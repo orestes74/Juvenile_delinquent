@@ -14,6 +14,7 @@ Wan 모델 영상생성 — 대사 없는 회화풍 단편 애니메이션의 �
 | `workflows/shot01-api.json` | 스크립트 제출용 API 워크플로 |
 | `assets/shot01-younger.png` | 약 10~11세 소년으로 수정한 시작 그림 |
 | `models.json` | 필요한 모델의 파일명, 크기, 다운로드 URL |
+| `examples/shot01-younger.mp4` | 생성 결과를 정확히 5초로 정리한 MP4 시안 |
 | `scripts/check_models.py` | 모델 파일의 존재·크기·헤더 검사 |
 | `scripts/submit_workflow.py` | 그림 업로드, 생성 요청, 결과 다운로드 |
 
@@ -92,7 +93,11 @@ ffmpeg -i result.webm -t 5 -an -c:v libx264 -crf 18 -pix_fmt yuv420p -movflags +
 - 모델 네 파일의 헤더와 기록된 파일 길이 정상
 - CUDA 기본 연산 성공
 - 256×256, 9프레임, 2스텝의 작은 검증 영상 생성 성공: 모델 초기 로딩 포함 약 199초
-- 1024×768, 81프레임, 20스텝의 첫 장면은 생성 중이며, 현재 관측한 스텝 시간은 약 3분 안팎
+- 1024×768, 81프레임, 20스텝의 첫 장면 생성 성공: **1시간 8분 45초(4,125초)**
+- 원본 WebM은 약 5.063초이며, 마지막 한 프레임을 잘라 MP4 5.000초·80프레임·16fps로 변환
+- 첫·중간·마지막 프레임을 점검했고 인물과 회화풍은 대체로 유지됨. 움직임은 작게 나왔으며, 창문의 금이 퍼지는 연출은 뚜렷하게 구현되지 않아 후속 조정이 필요함
+
+[첫 5초 MP4 시안](examples/shot01-younger.mp4) · [실행 기록](examples/shot01-run.json)
 
 현재 환경은 CUDA 최적화 관련 경고가 있고 SageAttention·FlashAttention이 설치되지 않았습니다. 위 수치를 최적화된 Spark나 다른 GPU의 성능으로 일반화하지 않습니다. 모델 검사는 파일 내용 전체의 SHA-256 검증이 아닌 헤더·길이 검사입니다.
 
